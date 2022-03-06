@@ -1,0 +1,172 @@
+* {
+   padding: 0;
+   margin: 0;
+}
+.card {
+   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+   background-color: rgb(147, 118, 209);
+   width: 20%;
+   padding: 20px 20px;
+   .card-title {
+      display: flex;
+      justify-content: space-between;
+      .card-title__button {
+         .card-title__edit-button {
+            text-transform: uppercase;
+            border: 0;
+            font-weight: 700;
+            color: white;
+            padding: 10px;
+            border-radius: 3px;
+            background: rgb(64, 199, 129);
+            box-shadow: 0 -3px rgb(53, 167, 110) inset;
+            transition: 0.2s;
+            &:hover {
+               background: rgb(53, 167, 110);
+            }
+            &:active {
+               background: rgb(33, 147, 90);
+               box-shadow: 0 3px rgb(33, 147, 90) inset;
+            }
+         }
+         .card-title__delete-button {
+            text-transform: uppercase;
+            border: 0;
+            font-weight: 700;
+            color: white;
+            padding: 10px;
+            border-radius: 3px;
+            background: rgb(190, 54, 65);
+            box-shadow: 0 -3px rgb(190, 54, 65) inset;
+            transition: 0.2s;
+            &:hover {
+               background: rgb(190, 54, 65);
+            }
+            &:active {
+               background: rgb(129, 34, 28);
+               box-shadow: 0 3px rgb(129, 34, 28) inset;
+            }
+         }
+      }
+   }
+   .card-description {
+      display: flex;
+      justify-content: space-between;
+      .card-description__move {
+         text-transform: uppercase;
+         border: 0;
+         font-weight: 700;
+         color: white;
+         padding: 10px;
+         border-radius: 3px;
+         background: rgb(75, 177, 218);
+         box-shadow: 0 -3px rgb(75, 177, 218) inset;
+         transition: 0.2s;
+         &:hover {
+            background: rgb(75, 177, 218);
+         }
+         &:active {
+            background: rgb(42, 137, 175);
+            box-shadow: 0 3px rgb(42, 137, 175) inset;
+         }
+      }
+   }
+   .card-user {
+      display: flex;
+      justify-content: space-between;
+   }
+}
+.popup {
+   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+   display: none;
+   position: fixed;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.555);
+   top: 0;
+   left: 0;
+   .popup__body {
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 10px;
+   }
+   .popup__content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background-color: rgb(230, 222, 213);
+      max-width: 800px;
+      padding: 30px;
+      .popup__title {
+         width: 50%;
+         height: 30px;
+         background-color: antiquewhite;
+      }
+      .popup__description {
+         height: 100px;
+         background-color: antiquewhite;
+      }
+      .popup-button__container {
+         display: flex;
+         justify-content: space-between;
+         .popup-button__select {
+            text-transform: uppercase;
+            border: 0;
+            font-weight: 700;
+            color: white;
+            padding: 10px;
+            border-radius: 3px;
+            background: rgb(0, 93, 105);
+            box-shadow: 0 -3px rgb(0, 93, 105) inset;
+            transition: 0.2s;
+            &:hover {
+               background: rgb(0, 93, 105);
+            }
+         }
+         .popup-button {
+            .popup-button__cancel {
+               text-transform: uppercase;
+               border: 0;
+               font-weight: 700;
+               color: white;
+               padding: 10px;
+               border-radius: 3px;
+               background: rgb(190, 54, 65);
+               box-shadow: 0 -3px rgb(190, 54, 65) inset;
+               transition: 0.2s;
+               &:hover {
+                  background: rgb(190, 54, 65);
+               }
+               &:active {
+                  background: rgb(129, 34, 28);
+                  box-shadow: 0 3px rgb(129, 34, 28) inset;
+               }
+            }
+            .popup-button__confirm {
+               text-transform: uppercase;
+               border: 0;
+               font-weight: 700;
+               color: white;
+               padding: 10px;
+               border-radius: 3px;
+               background: rgb(64, 199, 129);
+               box-shadow: 0 -3px rgb(53, 167, 110) inset;
+               transition: 0.2s;
+               &:hover {
+                  background: rgb(53, 167, 110);
+               }
+               &:active {
+                  background: rgb(33, 147, 90);
+                  box-shadow: 0 3px rgb(33, 147, 90) inset;
+               }
+            }
+         }
+      }
+   }
+}
