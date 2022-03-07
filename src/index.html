@@ -8,58 +8,64 @@
         <title>Trello</title>
     </head>
     <body>
-        <header class="header_wrapper">
-            <div class="board_header">
-                <a href="/" class="logo_link">
-                    <img src="/svg/trello_logo.svg" alt="" class="logo_pic" />
+        <header class="header">
+            <div class="header__container">
+                <a href="/" class="header-logo__link">
+                    <img
+                        src="/svg/trello_logo.svg"
+                        alt=""
+                        class="header-logo__pic"
+                    />
                 </a>
-                <div class="clock"></div>
-            </div>
-            <div class="member_cards_board">
-                <div class="list_wrapper">
-                    <div class="list">
-                        <div class="list_header">
-                            <div class="list_header_name">TODO:</div>
-                            <div class="list_header_namber">2</div>
-                        </div>
-                        <div class="list_cards">
-                            <a href="" class="list_card"></a
-                            ><a href="" class="list_card"></a>
-                        </div>
-                        <div class="list_footer">
-                            <button class="list_button">Add todo</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="list_wrapper">
-                    <div class="list">
-                        <div class="list_header">
-                            <div class="list_header_name">IN PRORGESS</div>
-                            <div class="list_header_namber">1</div>
-                        </div>
-                        <div class="list_cards">
-                            <a href="" class="list_card"></a
-                            ><a href="" class="list_card"></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="list_wrapper">
-                    <div class="list">
-                        <div class="list_header">
-                            <div class="list_header_name">DONE</div>
-                            <div class="list_header_namber">1</div>
-                        </div>
-                        <div class="list_cards">
-                            <a href="" class="list_card"></a>
-                        </div>
-                        <div class="list_footer">
-                            <button class="list_button">Delete all</button>
-                        </div>
-                    </div>
-                </div>
+                <div class="header-clock"></div>
             </div>
         </header>
+        <main class="main">
+            <div class="main__list">
+                <div class="list-wrapper">
+                    <div class="list">
+                        <div class="list__header">
+                            <div class="list-header__name">TODO:</div>
+                            <div class="list-header__namber">2</div>
+                        </div>
+                        <ul class="list__cards">
+                            <li><a href="" class="list__card"></a></li>
+                            <li><a href="" class="list__card"></a></li>
+                        </ul>
+                        <div class="list__footer">
+                            <button class="list__button">Add todo</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="list__wrapper">
+                    <div class="list">
+                        <div class="list__header">
+                            <div class="list0-header__name">IN PRORGESS</div>
+                            <div class="list-header__namber">1</div>
+                        </div>
+                        <ul class="list__cards">
+                            <li><a href="" class="list__card"></a></li>
+                            <li><a href="" class="list__card"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="list-wrapper">
+                    <div class="list">
+                        <div class="list__header">
+                            <div class="list-header__name">DONE</div>
+                            <div class="list-header__namber">1</div>
+                        </div>
+                        <ul class="list__cards">
+                            <li><a href="" class="list__card"></a></li>
+                        </ul>
+                        <div class="list__footer">
+                            <button class="list__button">Delete all</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
         <script src="./app.js"></script>
     </body>
 </html>
