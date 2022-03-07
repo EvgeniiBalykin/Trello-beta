@@ -16,6 +16,8 @@
       .card-title__button {
          .card-title__edit-button {
             text-transform: uppercase;
+            text-align: center;
+            max-height: 50px;
             border: 0;
             font-weight: 700;
             color: white;
@@ -34,6 +36,8 @@
          }
          .card-title__delete-button {
             text-transform: uppercase;
+            text-align: center;
+            max-height: 50px;
             border: 0;
             font-weight: 700;
             color: white;
@@ -55,8 +59,19 @@
    .card-description {
       display: flex;
       justify-content: space-between;
-      .card-description__move {
+      .card-description__description {
+         padding-right: 10px;
+         font-size: 15px;
+         line-height: 17px;
+         font-weight: 400;
+      }
+      .card-description__move-button {
+         display: flex;
+         justify-content: center;
+         align-items: center;
          text-transform: uppercase;
+         max-height: 50px;
+         margin: auto 0;
          border: 0;
          font-weight: 700;
          color: white;
@@ -77,6 +92,7 @@
    .card-user {
       display: flex;
       justify-content: space-between;
+      font-weight: 500;
    }
 }
 .popup {
@@ -167,6 +183,128 @@
                }
             }
          }
+      }
+   }
+}
+@media screen and (max-width: 1170px) {
+   .card {
+      padding: 10px 10px;
+      .card-title {
+         .card-title__button {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            .card-title__edit-button {
+               padding: 5px;
+               font-weight: 600;
+               font-size: 13px;
+            }
+            .card-title__delete-button {
+               padding: 5px;
+               font-weight: 600;
+               font-size: 13px;
+            }
+         }
+      }
+      .card-description {
+         .card-description__description {
+            font-size: 15px;
+            line-height: 17px;
+            font-weight: 400;
+         }
+         .card-description__move-button {
+            font-weight: 600;
+            font-size: 13px;
+            padding: 11.5px;
+         }
+      }
+      .card-user {
+         display: flex;
+         justify-content: space-between;
+      }
+   }
+}
+
+@media screen and (max-width: 820px) {
+   .card {
+      .card-title {
+         .card-title__title {
+            font-size: 18px;
+         }
+         .card-title__button {
+            .card-title__edit-button {
+               padding: 5px;
+               font-weight: 600;
+               font-size: 11px;
+            }
+            .card-title__delete-button {
+               padding: 5px;
+               font-weight: 600;
+               font-size: 11px;
+            }
+         }
+      }
+      .card-description {
+         .card-description__description {
+            font-size: 13px;
+            line-height: 17px;
+         }
+         .card-description__move-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            font-size: 11px;
+            padding: 10.5px;
+         }
+      }
+      .card-user {
+         display: flex;
+         justify-content: space-between;
+         font-size: 15px;
+      }
+   }
+}
+
+@media screen and (max-width: 768px) {
+   .card {
+      padding: 0%;
+      width: 100%;
+      .card-title {
+         .card-title__title {
+            font-size: 17px;
+         }
+         .card-title__button {
+            .card-title__edit-button {
+               padding: 5px;
+               font-weight: 600;
+               font-size: 11px;
+            }
+            .card-title__delete-button {
+               padding: 5px;
+               font-weight: 600;
+               font-size: 11px;
+            }
+         }
+      }
+      .card-description {
+         .card-description__description {
+            font-size: 13px;
+            line-height: 17px;
+         }
+         .card-description__move-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            font-size: 11px;
+            padding: 10.5px;
+         }
+      }
+      .card-user {
+         display: flex;
+         justify-content: space-between;
+         font-size: 15px;
       }
    }
 }
