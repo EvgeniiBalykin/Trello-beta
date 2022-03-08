@@ -97,7 +97,7 @@
 }
 .popup {
    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-   display: none;
+   display: block;
    position: fixed;
    width: 100%;
    height: 100%;
@@ -305,6 +305,33 @@
          display: flex;
          justify-content: space-between;
          font-size: 15px;
+      }
+   }
+   .popup {
+      .popup__content {
+         gap: 10px;
+         max-width: 360px;
+         padding: 20px;
+         .popup-button__container {
+            display: flex;
+            gap: 20px;
+            flex-direction: column;
+            justify-content: space-between;
+            .popup-button__select {
+               font-weight: 700;
+               font-size: 15px;
+            }
+            .popup-button {
+               display: flex;
+               justify-content: space-between;
+               .popup-button__cancel {
+                  font-size: 15px;
+               }
+               .popup-button__confirm {
+                  font-size: 15px;
+               }
+            }
+         }
       }
    }
 }

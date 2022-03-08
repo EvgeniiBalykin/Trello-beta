@@ -129,7 +129,7 @@
 
 .popup {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  display: none;
+  display: block;
   position: fixed;
   width: 100%;
   height: 100%;
@@ -368,6 +368,43 @@
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
+    font-size: 15px;
+  }
+
+  .popup .popup__content {
+    gap: 10px;
+    max-width: 360px;
+    padding: 20px;
+  }
+  .popup .popup__content .popup-button__container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 20px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .popup .popup__content .popup-button__container .popup-button__select {
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .popup .popup__content .popup-button__container .popup-button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .popup .popup__content .popup-button__container .popup-button .popup-button__cancel {
+    font-size: 15px;
+  }
+  .popup .popup__content .popup-button__container .popup-button .popup-button__confirm {
     font-size: 15px;
   }
 }
