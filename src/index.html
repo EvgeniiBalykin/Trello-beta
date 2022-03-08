@@ -4,26 +4,26 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="/src/style.css" />
         <title>Trello</title>
     </head>
     <body>
-        <header class="header">
-            <div class="header__container">
-                <a href="/" class="header-logo__link">
-                    <img
-                        src="/svg/trello_logo.svg"
-                        alt=""
-                        class="header-logo__pic"
-                    />
-                </a>
-                <div class="header-clock"></div>
-            </div>
-        </header>
-        <main class="main">
-            <div class="main__list">
-                <div class="list-wrapper">
-                    <div class="list">
+        <div class="container">
+            <header class="header">
+                <div class="header__container">
+                    <a href="/" class="header-logo__link">
+                        <img
+                            src="/svg/trello_logo.svg"
+                            alt=""
+                            class="header-logo__pic"
+                        />
+                    </a>
+                    <div class="header-clock"></div>
+                </div>
+            </header>
+            <main class="main">
+                <div class="main__list">
+                    <div class="list__column">
                         <div class="list__header">
                             <div class="list-header__name">TODO:</div>
                             <div class="list-header__namber">2</div>
@@ -36,9 +36,8 @@
                             <button class="list__button">Add todo</button>
                         </div>
                     </div>
-                </div>
-                <div class="list__wrapper">
-                    <div class="list">
+
+                    <div class="list__column">
                         <div class="list__header">
                             <div class="list0-header__name">IN PRORGESS</div>
                             <div class="list-header__namber">1</div>
@@ -48,9 +47,8 @@
                             <li><a href="" class="list__card"></a></li>
                         </ul>
                     </div>
-                </div>
-                <div class="list-wrapper">
-                    <div class="list">
+
+                    <div class="list__column">
                         <div class="list__header">
                             <div class="list-header__name">DONE</div>
                             <div class="list-header__namber">1</div>
@@ -63,8 +61,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </main>
+            </main>
+        </div>
 
         <script src="./app.js"></script>
     </body>
