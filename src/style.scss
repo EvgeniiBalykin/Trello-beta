@@ -9,8 +9,8 @@
    gap: 15px;
    background-color: rgb(147, 118, 209);
    width: 20%;
-   padding: 20px 20px;
-   .card-title {
+   padding: 20px 10px;
+   &-title {
       display: flex;
       justify-content: space-between;
       .card-title__button {
@@ -59,13 +59,13 @@
    .card-description {
       display: flex;
       justify-content: space-between;
-      .card-description__description {
+      &__description {
          padding-right: 10px;
          font-size: 15px;
          line-height: 17px;
          font-weight: 400;
       }
-      .card-description__move-button {
+      &__move-button {
          display: flex;
          justify-content: center;
          align-items: center;
@@ -104,14 +104,14 @@
    background-color: rgba(0, 0, 0, 0.555);
    top: 0;
    left: 0;
-   .popup__body {
+   &__body {
       min-height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 30px 10px;
    }
-   .popup__content {
+   &__content {
       position: relative;
       display: flex;
       flex-direction: column;
@@ -146,7 +146,7 @@
             }
          }
          .popup-button {
-            .popup-button__cancel {
+            &__cancel {
                text-transform: uppercase;
                border: 0;
                font-weight: 700;
@@ -188,9 +188,8 @@
 }
 @media screen and (max-width: 1170px) {
    .card {
-      padding: 10px 10px;
-      .card-title {
-         .card-title__button {
+      &-title {
+         &__button {
             display: flex;
             flex-direction: column;
             gap: 5px;
@@ -207,18 +206,18 @@
          }
       }
       .card-description {
-         .card-description__description {
+         &__description {
             font-size: 15px;
             line-height: 17px;
             font-weight: 400;
          }
-         .card-description__move-button {
+         &__move-button {
             font-weight: 600;
             font-size: 13px;
             padding: 11.5px;
          }
       }
-      .card-user {
+      &-user {
          display: flex;
          justify-content: space-between;
       }
@@ -227,8 +226,9 @@
 
 @media screen and (max-width: 820px) {
    .card {
-      .card-title {
-         .card-title__title {
+      width: 40%;
+      &-title {
+         &__title {
             font-size: 18px;
          }
          .card-title__button {
@@ -245,7 +245,7 @@
          }
       }
       .card-description {
-         .card-description__description {
+         &__description {
             font-size: 13px;
             line-height: 17px;
          }
@@ -268,13 +268,12 @@
 
 @media screen and (max-width: 768px) {
    .card {
-      padding: 0%;
       width: 100%;
-      .card-title {
-         .card-title__title {
+      &-title {
+         &__title {
             font-size: 17px;
          }
-         .card-title__button {
+         &__button {
             .card-title__edit-button {
                padding: 5px;
                font-weight: 600;
@@ -287,12 +286,12 @@
             }
          }
       }
-      .card-description {
-         .card-description__description {
+      &-description {
+         &__description {
             font-size: 13px;
             line-height: 17px;
          }
-         .card-description__move-button {
+         &__move-button {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -301,14 +300,14 @@
             padding: 10.5px;
          }
       }
-      .card-user {
+      &-user {
          display: flex;
          justify-content: space-between;
          font-size: 15px;
       }
    }
    .popup {
-      .popup__content {
+      &__content {
          gap: 10px;
          max-width: 360px;
          padding: 20px;
@@ -324,11 +323,108 @@
             .popup-button {
                display: flex;
                justify-content: space-between;
-               .popup-button__cancel {
+               &__cancel {
                   font-size: 15px;
                }
-               .popup-button__confirm {
+               &__confirm {
                   font-size: 15px;
+               }
+            }
+         }
+      }
+   }
+}
+@media screen and (max-width: 375px) {
+   .card {
+      width: 100%;
+      &-title {
+         &__title {
+            font-size: 17px;
+         }
+         &__button {
+            .card-title__edit-button {
+               padding: 5px;
+               font-weight: 600;
+               font-size: 11px;
+            }
+            .card-title__delete-button {
+               padding: 5px;
+               font-weight: 600;
+               font-size: 11px;
+            }
+         }
+      }
+      &-description {
+         &__description {
+            font-size: 13px;
+            line-height: 17px;
+         }
+         &__move-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            font-size: 11px;
+            padding: 10.5px;
+         }
+      }
+      &-user {
+         display: flex;
+         justify-content: space-between;
+         font-size: 15px;
+      }
+   }
+   .popup {
+      &__content {
+         gap: 10px;
+         max-width: 360px;
+         padding: 20px;
+         .popup-button__container {
+            display: flex;
+            gap: 20px;
+            flex-direction: column;
+            justify-content: space-between;
+            .popup-button__select {
+               font-weight: 700;
+               font-size: 15px;
+            }
+            .popup-button {
+               display: flex;
+               justify-content: space-between;
+               &__cancel {
+                  font-size: 15px;
+               }
+               &__confirm {
+                  font-size: 15px;
+               }
+            }
+         }
+      }
+   }
+}
+@media screen and (max-width: 370px) {
+   .popup {
+      &__content {
+         gap: 5px;
+         max-width: 300px;
+         padding: 5px;
+         .popup-button__container {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            justify-content: space-between;
+            .popup-button__select {
+               font-weight: 700;
+               font-size: 12px;
+            }
+            .popup-button {
+               display: flex;
+               justify-content: space-between;
+               &__cancel {
+                  font-size: 12px;
+               }
+               &__confirm {
+                  font-size: 12px;
                }
             }
          }
