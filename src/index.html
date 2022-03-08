@@ -1,14 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
-  <title>Trello</title>
-</head>
-<body>
-  
-  <script src="./app.js"></script>
-</body>
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="./style.scss" />
+      <title>Trello</title>
+   </head>
+   <body>
+      <div class="card">
+         <div class="card-title">
+            <h3 class="card-title__title">Title</h3>
+            <div class="card-title__button">
+               <button class="card-title__edit-button">Edit</button>
+               <button class="card-title__delete-button">Delete</button>
+            </div>
+         </div>
+         <div class="card-description">
+            <h3 class="card-description__description">
+               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+               Sapiente voluptas sint nulla ea perferendis dolorem minus eos
+               omnis, temporibus similique eveniet, maiores iusto harum vitae!
+               Maxime autem laudantium natus reiciendis.
+            </h3>
+            <button class="card-description__move-button">Move</button>
+         </div>
+         <div class="card-user">
+            <p class="card-user__user">User</p>
+            <p class="card-user__time">Time</p>
+         </div>
+      </div>
+
+      <div id="popup" class="popup">
+         <div class="popup__body">
+            <div class="popup__content">
+               <textarea
+                  class="popup__title"
+                  cols="45"
+                  placeholder="Title"
+               ></textarea>
+               <textarea
+                  class="popup__description"
+                  cols="45"
+                  placeholder="Description"
+               ></textarea>
+               <div class="popup-button__container">
+                  <select class="popup-button__select" size="1">
+                     <option>select user</option>
+                     <option>user 1</option>
+                     <option>user 2</option>
+                     <option>user 3</option>
+                  </select>
+                  <div class="popup-button">
+                     <button class="popup-button__cancel">Cancel</button>
+                     <button class="popup-button__confirm">Confirm</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src="./app.js"></script>
+   </body>
 </html>
