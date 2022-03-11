@@ -1,14 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="stylesheet" href="./style.scss" />
-      <title>Trello</title>
-   </head>
-   <body>
-      <div class="card">
+    <body>
+        <div class="container">
+            <header class="header">
+                <div class="header__container">
+                    <a href="/" class="header-logo__link">
+                        <img
+                            src="../svg/trello_logo.svg"
+                            alt=""
+                            class="header-logo__pic"
+                        />
+                    </a>
+                    <div class="header-clock"></div>
+                </div>
+            </header>
+            <main class="main">
+                <div class="main__list">
+                    <div class="list__column">
+                        <div class="list__header">
+                            <div class="list-header__name">TODO:</div>
+                            <div class="list-header__namber">2</div>
+                        </div>
+                        <ul class="list__cards">
+                            <li><a href="" class="list__card"></a></li>
+                            <li><a href="" class="list__card"></a></li>
+                        </ul>
+                        <div class="list__footer">
+                            <button class="list__button">Add todo</button>
+                        </div>
+                    </div>
+
+                    <div class="list__column">
+                        <div class="list__header">
+                            <div class="list-header__name">IN PRORGESS</div>
+                            <div class="list-header__namber">1</div>
+                        </div>
+                        <ul class="list__cards">
+                            <li><a href="" class="list__card"></a></li>
+                            <li><a href="" class="list__card"></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="list__column">
+                        <div class="list__header">
+                            <div class="list-header__name">DONE</div>
+                            <div class="list-header__namber">1</div>
+                        </div>
+                        <ul class="list__cards">
+                            <li><a href="" class="list__card"></a></li>
+                        </ul>
+                        <div class="list__footer">
+                            <button class="list__button">Delete all</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <div class="card">
          <div class="card-title">
             <h3 class="card-title__title">Title</h3>
             <div class="card-title__button">
@@ -59,6 +107,6 @@
             </div>
          </div>
       </div>
-      <script src="./app.js"></script>
-   </body>
+        <script src="./app.js"></script>
+    </body>
 </html>
