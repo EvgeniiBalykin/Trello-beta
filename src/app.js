@@ -1,5 +1,8 @@
 const todoContainer = document.querySelector(".list-todo");
 let users = null;
+const editPopup = document.querySelector('.popup-edit')
+let cardId = 0
+const cards = document.getElementsByClassName('card')
 
 fetch("https://jsonplaceholder.typicode.com/users")
     .then((response) => response.json())
@@ -10,6 +13,9 @@ fetch("https://jsonplaceholder.typicode.com/users")
             option.setAttribute("value", user.name);
             option.textContent = user.name;
             userSelect.append(option);
+            
+            const userEditSelect = document.querySelector(".popup-edit-button__user")
+            userEditSelect.append(option.cloneNode(true))
         });
     });
 
@@ -117,3 +123,58 @@ window.onload = function () {
             (hours < 10 ? "0" : "") + hours;
     }, 1000);
 };
+
+document.addEventListener('click', event => {
+    if (event.target.classList.contains('card-title__delete-button')) {
+        const card = event.target.closest('.card')
+        const cardId = card.dataset.id
+        localStorage.removeItem(cardId)
+        card.remove()
+    }
+})
+
+document.addEventListener('click', event => {
+    if (event.target.classList.contains('card-title__edit-button')) {
+        editPopup.style.display = 'block'
+        const card = event.target.closest('.card')
+        cardId = card.dataset.id 
+        const title = editPopup.querySelector('.popup-edit__title')
+        const description = editPopup.querySelector('.popup-edit__description')
+        const userData = JSON.parse(localStorage.getItem(cardId)) 
+        title.value = userData.title
+        description.value = userData.description
+    } 
+    if (event.target.classList.contains('popup-edit-button__cancel')) {
+        editPopup.style.display = 'none'
+    }
+    if (event.target.classList.contains('popup-edit-button__edit')) {
+        const title = document.querySelector(".popup-edit__title");
+        const description = document.querySelector(".popup-edit__description");
+        const userSelect = document.querySelector(".popup-edit-button__user");
+
+        function createCard() {
+            return {
+                title: title.value,
+                description: description.value,
+                user: userSelect.value,
+                id: cardId,
+                container: "todo",
+            };
+        }
+        localStorage.setItem(cardId, JSON.stringify(createCard()));
+        editPopup.style.display = 'none'
+
+        for(let i = 0; i < cards.length; i++) {
+            console.log(cards[i])
+            const id = cards[i].dataset.id
+            if(cardId === id) {
+                const titleCard = cards[i].querySelector('.card-title__title')
+                const descriptionCard = cards[i].querySelector('.card-description__description')
+                const userCard = cards[i].querySelector('.card-user__user')
+                titleCard.textContent = title.value
+                descriptionCard.textContent = description.value
+                userCard.textContent = userSelect.value
+            } 
+        }
+    }
+})
