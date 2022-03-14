@@ -89,6 +89,26 @@ document.addEventListener("click", (event) => {
         const popup = document.querySelector(".popup");
         popup.style.display = "none";
     }
+
+    if(event.target.classList.contains('card-description__move-button')) {
+        const card = document.querySelector('.card');
+
+        const dataId = card.getAttribute('data-id');
+
+        const cardData = JSON.parse(localStorage.getItem(dataId));
+
+        if (cardData.container === 'todo') {
+            cardData.container = 'progress';
+             
+            localStorage.setItem(dataId, JSON.stringify(cardData)); 
+        } else if (cardData.container === 'progress') {
+            cardData.container = 'done';
+             
+            localStorage.setItem(dataId, JSON.stringify(cardData)); 
+        }
+
+        
+    };
 });
 
 const btn = document.querySelector(".list__button");
@@ -98,7 +118,7 @@ btn.addEventListener("click", () => {
     popup.style.display = "block";
 });
 
-// Clok
+// Clock
 window.onload = function () {
     setInterval(function () {
         // Seconds
