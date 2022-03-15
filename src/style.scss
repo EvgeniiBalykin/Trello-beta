@@ -213,6 +213,7 @@ body {
       display: flex;
       justify-content: space-between;
       .card-title__button {
+         display: flex;
          .card-title__edit-button {
             text-transform: uppercase;
             text-align: center;
@@ -251,6 +252,26 @@ body {
             &:active {
                background: rgb(129, 34, 28);
                box-shadow: 0 3px rgb(129, 34, 28) inset;
+            }
+         }
+         .card-title__back-button {
+            text-transform: uppercase;
+            text-align: center;
+            max-height: 50px;
+            border: 0;
+            font-weight: 700;
+            color: white;
+            padding: 10px;
+            border-radius: 3px;
+            background: rgb(95, 238, 164);
+            box-shadow: 0 -3px rgb(95, 238, 164) inset;
+            transition: 0.2s;
+            &:hover {
+               background: rgb(95, 238, 164);
+            }
+            &:active {
+               background: rgb(75, 198, 134);
+               box-shadow: 0 3px rgb(75, 198, 134) inset;
             }
          }
       }

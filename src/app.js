@@ -188,10 +188,12 @@ document.addEventListener('click', event => {
         const editBtn = card.querySelector('.card-title__edit-button');
         const moveBtn = card.querySelector('.card-description__move-button');
         const deleteBtn = card.querySelector('.card-title__delete-button');
-        const cardTitle = card.querySelector('.card-title__button');
-        const cardData = JSON.parse(localStorage.getItem(cardId));
         const listProgress = document.querySelector('.list-progress');
         const listDone = document.querySelector('.list-done');
+        const cardTitle = card.querySelector('.card-title__button');
+        const cardDescr = card.querySelector('.card-description');
+
+        const cardData = JSON.parse(localStorage.getItem(cardId));
 
         if (cardData.container === 'progress') {
             cardData.container = 'done';
@@ -202,19 +204,42 @@ document.addEventListener('click', event => {
 
             deleteBtn.style.display = 'block';
             moveBtn.style.display = 'none';
+
+            card.querySelector('.card-title__back-button').remove();
         } else if (cardData.container === 'todo') {
             cardData.container = 'progress';
                 
             localStorage.setItem(cardId, JSON.stringify(cardData));
                 
             listProgress.append(card);
-
-            cardTitle.append(moveBtn);
-
+       
             moveBtn.innerHTML = 'complete';
-
+            
             editBtn.style.display = 'none';
             deleteBtn.style.display = 'none';
+
+            const backBtn = document.createElement('button');
+            backBtn.classList.add('card-title__back-button');
+            backBtn.innerHTML = 'back';
+            cardTitle.append(backBtn);
+
+            backBtn.addEventListener('click', () => {
+                cardData.container = 'todo';
+                
+                localStorage.setItem(cardId, JSON.stringify(cardData));
+                    
+                todoContainer.append(card);
+        
+                moveBtn.innerHTML = 'move';
+
+                deleteBtn.style.display = 'block';
+                editBtn.style.display = 'block';
+
+                backBtn.remove();
+                cardDescr.append(moveBtn);
+            });
+
+            cardTitle.append(moveBtn);
         }
     }
 });
