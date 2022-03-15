@@ -183,19 +183,38 @@ document.addEventListener('click', event => {
 
 document.addEventListener('click', event => {
     if(event.target.classList.contains('card-description__move-button')) {
-        const card = event.target.closest('.card')
+        const card = event.target.closest('.card');
         const cardId = card.dataset.id;
-
+        const editBtn = card.querySelector('.card-title__edit-button');
+        const moveBtn = card.querySelector('.card-description__move-button');
+        const deleteBtn = card.querySelector('.card-title__delete-button');
+        const cardTitle = card.querySelector('.card-title__button');
         const cardData = JSON.parse(localStorage.getItem(cardId));
+        const listProgress = document.querySelector('.list-progress');
+        const listDone = document.querySelector('.list-done');
 
-        if (cardData.container === 'todo') {
-            cardData.container = 'progress';
-            
-            localStorage.setItem(cardId, JSON.stringify(cardData)); 
-        } else if (cardData.container === 'progress') {
+        if (cardData.container === 'progress') {
             cardData.container = 'done';
-            
-            localStorage.setItem(cardId, JSON.stringify(cardData)); 
+                
+            localStorage.setItem(cardId, JSON.stringify(cardData));
+    
+            listDone.append(card);
+
+            deleteBtn.style.display = 'block';
+            moveBtn.style.display = 'none';
+        } else if (cardData.container === 'todo') {
+            cardData.container = 'progress';
+                
+            localStorage.setItem(cardId, JSON.stringify(cardData));
+                
+            listProgress.append(card);
+
+            cardTitle.append(moveBtn);
+
+            moveBtn.innerHTML = 'complete';
+
+            editBtn.style.display = 'none';
+            deleteBtn.style.display = 'none';
         }
     }
 });
