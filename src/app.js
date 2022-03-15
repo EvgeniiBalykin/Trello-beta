@@ -96,25 +96,7 @@ document.addEventListener("click", (event) => {
         popup.style.display = "none";
     }
 
-    if(event.target.classList.contains('card-description__move-button')) {
-        const card = document.querySelector('.card');
 
-        const dataId = card.getAttribute('data-id');
-
-        const cardData = JSON.parse(localStorage.getItem(dataId));
-
-        if (cardData.container === 'todo') {
-            cardData.container = 'progress';
-             
-            localStorage.setItem(dataId, JSON.stringify(cardData)); 
-        } else if (cardData.container === 'progress') {
-            cardData.container = 'done';
-             
-            localStorage.setItem(dataId, JSON.stringify(cardData)); 
-        }
-
-        
-    };
 });
 
 const btn = document.querySelector(".list__button");
@@ -197,4 +179,23 @@ document.addEventListener('click', event => {
             } 
         }
     }
-})
+});
+
+document.addEventListener('click', event => {
+    if(event.target.classList.contains('card-description__move-button')) {
+        const card = event.target.closest('.card')
+        const cardId = card.dataset.id;
+
+        const cardData = JSON.parse(localStorage.getItem(cardId));
+
+        if (cardData.container === 'todo') {
+            cardData.container = 'progress';
+            
+            localStorage.setItem(cardId, JSON.stringify(cardData)); 
+        } else if (cardData.container === 'progress') {
+            cardData.container = 'done';
+            
+            localStorage.setItem(cardId, JSON.stringify(cardData)); 
+        }
+    }
+});
