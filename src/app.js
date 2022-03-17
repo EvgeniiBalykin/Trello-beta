@@ -195,51 +195,64 @@ document.addEventListener('click', event => {
 
         const cardData = JSON.parse(localStorage.getItem(cardId));
 
-        if (cardData.container === 'progress') {
-            cardData.container = 'done';
-                
-            localStorage.setItem(cardId, JSON.stringify(cardData));
+            if (cardData.container === 'progress') {
+                const confirmToDone = confirm("Do you really want to move this card to 'Done' column?");
+
+                if (confirmToDone) {
+                cardData.container = 'done';
+                    
+                localStorage.setItem(cardId, JSON.stringify(cardData));
+        
+                listDone.append(card);
     
-            listDone.append(card);
+                deleteBtn.style.display = 'block';
+                moveBtn.style.display = 'none';
+    
+                card.querySelector('.card-title__back-button').remove();
+                }
+            } else if (cardData.container === 'todo') {
+                const confirmToInProgress = confirm("Do you really want to move this card to 'In Progress' column?");
 
-            deleteBtn.style.display = 'block';
-            moveBtn.style.display = 'none';
-
-            card.querySelector('.card-title__back-button').remove();
-        } else if (cardData.container === 'todo') {
-            cardData.container = 'progress';
-                
-            localStorage.setItem(cardId, JSON.stringify(cardData));
-                
-            listProgress.append(card);
-       
-            moveBtn.innerHTML = 'complete';
-            
-            editBtn.style.display = 'none';
-            deleteBtn.style.display = 'none';
-
-            const backBtn = document.createElement('button');
-            backBtn.classList.add('card-title__back-button');
-            backBtn.innerHTML = 'back';
-            cardTitle.append(backBtn);
-
-            backBtn.addEventListener('click', () => {
-                cardData.container = 'todo';
-                
+                if (confirmToInProgress) {
+                cardData.container = 'progress';
+                    
                 localStorage.setItem(cardId, JSON.stringify(cardData));
                     
-                todoContainer.append(card);
-        
-                moveBtn.innerHTML = 'move';
+                listProgress.append(card);
+           
+                moveBtn.innerHTML = 'complete';
+                
+                editBtn.style.display = 'none';
+                deleteBtn.style.display = 'none';
+    
+                const backBtn = document.createElement('button');
+                backBtn.classList.add('card-title__back-button');
+                backBtn.innerHTML = 'back';
+                cardTitle.append(backBtn);
+    
+                backBtn.addEventListener('click', () => {  
+                    let confirmBackAction = confirm("Do you really want to move this card back?");
 
-                deleteBtn.style.display = 'block';
-                editBtn.style.display = 'block';
+                    if (confirmBackAction) {
 
-                backBtn.remove();
-                cardDescr.append(moveBtn);
-            });
+                    cardData.container = 'todo';
+                    
+                    localStorage.setItem(cardId, JSON.stringify(cardData));
+                        
+                    todoContainer.append(card);
+            
+                    moveBtn.innerHTML = 'move';
+    
+                    deleteBtn.style.display = 'block';
+                    editBtn.style.display = 'block';
+    
+                    backBtn.remove();
+                    cardDescr.append(moveBtn);
+                    }
+                });
 
-            cardTitle.append(moveBtn);
+                cardTitle.append(moveBtn);
+            }
         }
     }
 });
