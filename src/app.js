@@ -1,4 +1,6 @@
 const todoContainer = document.querySelector(".list-todo");
+const progressContainer = document.querySelector('.list-progress')
+const doneContainer = document.querySelector('.list-done')
 let users = null;
 const editPopup = document.querySelector(".popup-edit");
 let cardId = 0;
@@ -52,7 +54,7 @@ const renderCard = (card) => {
       ${formatMinutes(currentDate.getMinutes())}</p>
     </div>`,
     );
-    todoContainer.append(div);
+    return div
 };
 
 document.addEventListener("click", (event) => {
@@ -63,7 +65,7 @@ document.addEventListener("click", (event) => {
 
         const id = Date.now();
 
-        const card = createCard(
+        const cardData = createCard(
             id,
             title.value,
             description.value,
@@ -71,10 +73,11 @@ document.addEventListener("click", (event) => {
         );
 
         // add to storage
-        localStorage.setItem(id, JSON.stringify(card));
+        localStorage.setItem(id, JSON.stringify(cardData));
 
         // render card
-        renderCard(card);
+        const card = renderCard(cardData);
+        todoContainer.append(card)
         updateColumnsCounter();
 
         title.value = "";
@@ -100,7 +103,6 @@ btn.addEventListener("click", () => {
 // Clok
 window.onload = function () {
     initTimer();
-    renderAllCards();
     updateColumnsCounter();
 };
 
@@ -181,27 +183,14 @@ document.addEventListener("click", (event) => {
     }
 });
 
-function renderAllCards() {
-    const cards = getAllCards();
-    cards.forEach(renderCard);
-}
-
 function updateColumnsCounter() {
     const todoCountEl = document.getElementById("todo_counter");
     const inprogressCountEl = document.getElementById("inprogress_counter");
     const doneCountEl = document.getElementById("done_counter");
 
-    todoCountEl.innerText = document
-        .querySelector(".list-todo")
-        ?.querySelectorAll(".card").length;
-    inprogressCountEl.innerText = 0;
-    doneCountEl.innerText = 0;
-}
-
-function getAllCards() {
-    return Object.keys(localStorage).map((cardKey) =>
-        JSON.parse(localStorage.getItem(cardKey)),
-    );
+    todoCountEl.innerText = todoContainer.querySelectorAll(".card").length;
+    inprogressCountEl.innerText = progressContainer.querySelectorAll(".card").length;
+    doneCountEl.innerText = doneContainer.querySelectorAll(".card").length;
 }
 
 function createCard(id, title, description, user, container = "todo") {
