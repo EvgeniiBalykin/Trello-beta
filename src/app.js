@@ -91,6 +91,8 @@ document.addEventListener("click", (event) => {
         const popup = document.querySelector(".popup");
         popup.style.display = "none";
     }
+
+
 });
 
 const btn = document.querySelector(".list__button");
@@ -100,7 +102,7 @@ btn.addEventListener("click", () => {
     popup.style.display = "block";
 });
 
-// Clok
+// Clock
 window.onload = function () {
     initTimer();
     updateColumnsCounter();
@@ -181,6 +183,84 @@ document.addEventListener("click", (event) => {
             }
         }
     }
+});
+
+document.addEventListener('click', event => {
+    if(event.target.classList.contains('card-description__move-button')) {
+        const card = event.target.closest('.card');
+        const cardId = card.dataset.id;
+        const editBtn = card.querySelector('.card-title__edit-button');
+        const moveBtn = card.querySelector('.card-description__move-button');
+        const deleteBtn = card.querySelector('.card-title__delete-button');
+        const listProgress = document.querySelector('.list-progress');
+        const listDone = document.querySelector('.list-done');
+        const cardTitle = card.querySelector('.card-title__button');
+        const cardDescr = card.querySelector('.card-description');
+
+        const cardData = JSON.parse(localStorage.getItem(cardId));
+
+            if (cardData.container === 'progress') {
+                const confirmToDone = confirm("Do you really want to move this card to 'Done' column?");
+
+                if (confirmToDone) {
+                cardData.container = 'done';
+                    
+                localStorage.setItem(cardId, JSON.stringify(cardData));
+        
+                listDone.append(card);
+    
+                deleteBtn.style.display = 'block';
+                moveBtn.style.display = 'none';
+    
+                card.querySelector('.card-title__back-button').remove();
+                }
+            } else if (cardData.container === 'todo') {
+                const confirmToInProgress = confirm("Do you really want to move this card to 'In Progress' column?");
+
+                if (confirmToInProgress) {
+                cardData.container = 'progress';
+                    
+                localStorage.setItem(cardId, JSON.stringify(cardData));
+                    
+                listProgress.append(card);
+           
+                moveBtn.innerHTML = 'complete';
+                
+                editBtn.style.display = 'none';
+                deleteBtn.style.display = 'none';
+    
+                const backBtn = document.createElement('button');
+                backBtn.classList.add('card-title__back-button');
+                backBtn.innerHTML = 'back';
+                cardTitle.append(backBtn);
+    
+                backBtn.addEventListener('click', () => {  
+                    let confirmBackAction = confirm("Do you really want to move this card back?");
+
+                    if (confirmBackAction) {
+
+                    cardData.container = 'todo';
+                    
+                    localStorage.setItem(cardId, JSON.stringify(cardData));
+                        
+                    todoContainer.append(card);
+            
+                    moveBtn.innerHTML = 'move';
+    
+                    deleteBtn.style.display = 'block';
+                    editBtn.style.display = 'block';
+    
+                    backBtn.remove();
+                    cardDescr.append(moveBtn);
+                    }
+                });
+
+                cardTitle.append(moveBtn);
+            }
+        }
+    }
+
+    updateColumnsCounter();
 });
 
 function updateColumnsCounter() {
