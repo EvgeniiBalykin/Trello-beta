@@ -259,6 +259,8 @@ document.addEventListener('click', event => {
             }
         }
     }
+
+    updateColumnsCounter();
 });
 
 function updateColumnsCounter() {
