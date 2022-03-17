@@ -260,6 +260,7 @@ document.addEventListener('click', event => {
         }
     }
 });
+
 function updateColumnsCounter() {
     const todoCountEl = document.getElementById("todo_counter");
     const inprogressCountEl = document.getElementById("inprogress_counter");

@@ -206,19 +206,6 @@ body {
 }
 
 .card {
-   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-   display: flex;
-   flex-direction: column;
-   gap: 15px;
-   background-color: rgb(147, 118, 209);
-   width: 100%;
-   padding: 20px 10px;
-   &-title {
-      display: flex;
-      justify-content: space-between;
-      .card-title__button {
-         display: flex;
-         .card-title__edit-button {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
@@ -236,6 +223,7 @@ body {
         display: flex;
         justify-content: space-between;
         .card-title__button {
+            display: flex;
             .card-title__edit-button {
                 text-transform: uppercase;
                 text-align: center;
@@ -276,6 +264,26 @@ body {
                     box-shadow: 0 3px rgb(129, 34, 28) inset;
                 }
             }
+            .card-title__back-button {
+                text-transform: uppercase;
+                text-align: center;
+                max-height: 50px;
+                border: 0;
+                font-weight: 700;
+                color: white;
+                padding: 10px;
+                border-radius: 3px;
+                background: rgb(159, 76, 177);
+                box-shadow: 0 -3px rgb(159, 76, 177) inset;
+                transition: 0.2s;
+                &:hover {
+                   background: rgb(159, 76, 177);
+                }
+                &:active {
+                   background: rgb(112, 48, 127);
+                   box-shadow: 0 3px rgb(112, 48, 127) inset;
+                }
+             }
         }
     }
     .card-description {
@@ -299,15 +307,15 @@ body {
             color: white;
             padding: 10px;
             border-radius: 3px;
-            background: rgb(64, 199, 129);
-            box-shadow: 0 -3px rgb(53, 167, 110) inset;
+            background: rgb(87, 128, 209);
+            box-shadow: 0 -3px rgb(87, 128, 209) inset;
             transition: 0.2s;
             &:hover {
-                background: rgb(53, 167, 110);
+                background: rgb(87, 128, 209);
             }
             &:active {
-                background: rgb(33, 147, 90);
-                box-shadow: 0 3px rgb(33, 147, 90) inset;
+                background: rgb(57, 86, 144);
+                box-shadow: 0 3px rgb(57, 86, 144) inset;
             }
         }
         .card-title__delete-button {
@@ -339,15 +347,15 @@ body {
             color: white;
             padding: 10px;
             border-radius: 3px;
-            background: rgb(95, 238, 164);
-            box-shadow: 0 -3px rgb(95, 238, 164) inset;
+            background: rgb(159, 76, 177);
+            box-shadow: 0 -3px rgb(159, 76, 177) inset;
             transition: 0.2s;
             &:hover {
-               background: rgb(95, 238, 164);
+               background: rgb(159, 76, 177);
             }
             &:active {
-               background: rgb(75, 198, 134);
-               box-shadow: 0 3px rgb(75, 198, 134) inset;
+               background: rgb(112, 48, 127);
+               box-shadow: 0 3px rgb(112, 48, 127) inset;
             }
          }
       }
@@ -377,34 +385,6 @@ body {
          box-shadow: 0 -3px rgb(75, 177, 218) inset;
          transition: 0.2s;
          &:hover {
-        }
-    }
-}
-.card-description {
-    display: flex;
-    justify-content: space-between;
-    &__description {
-        padding-right: 10px;
-        font-size: 15px;
-        line-height: 17px;
-        font-weight: 400;
-    }
-    &__move-button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-transform: uppercase;
-        max-height: 50px;
-        margin: auto 0;
-        border: 0;
-        font-weight: 700;
-        color: white;
-        padding: 10px;
-        border-radius: 3px;
-        background: rgb(75, 177, 218);
-        box-shadow: 0 -3px rgb(75, 177, 218) inset;
-        transition: 0.2s;
-        &:hover {
             background: rgb(75, 177, 218);
         }
         &:active {
