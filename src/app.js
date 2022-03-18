@@ -1,10 +1,11 @@
 const todoContainer = document.querySelector(".list-todo");
-const progressContainer = document.querySelector('.list-progress')
-const doneContainer = document.querySelector('.list-done')
+const listProgress = document.querySelector('.list-progress');
+const listDone = document.querySelector('.list-done');
 let users = null;
 const editPopup = document.querySelector(".popup-edit");
 let cardId = 0;
 const cards = document.getElementsByClassName("card");
+const inprogressCountEl = document.getElementById("inprogress_counter");
 
 fetch("https://jsonplaceholder.typicode.com/users")
     .then((response) => response.json())
@@ -90,9 +91,7 @@ document.addEventListener("click", (event) => {
     if (event.target === document.querySelector(".popup-button__cancel")) {
         const popup = document.querySelector(".popup");
         popup.style.display = "none";
-    }
-
-
+    } 
 });
 
 const btn = document.querySelector(".list__button");
@@ -169,7 +168,6 @@ document.addEventListener("click", (event) => {
         editPopup.style.display = "none";
 
         for (let i = 0; i < cards.length; i++) {
-            console.log(cards[i]);
             const id = cards[i].dataset.id;
             if (cardId === id) {
                 const titleCard = cards[i].querySelector(".card-title__title");
@@ -199,23 +197,27 @@ document.addEventListener('click', event => {
 
         const cardData = JSON.parse(localStorage.getItem(cardId));
 
-            if (cardData.container === 'progress') {
-                const confirmToDone = confirm("Do you really want to move this card to 'Done' column?");
+        if (cardData.container === 'progress') {
+            const confirmToDone = confirm("Do you really want to move this card to 'Done' column?");
 
-                if (confirmToDone) {
-                cardData.container = 'done';
-                    
-                localStorage.setItem(cardId, JSON.stringify(cardData));
-        
-                listDone.append(card);
+            if (confirmToDone) {
+            cardData.container = 'done';
+                
+            localStorage.setItem(cardId, JSON.stringify(cardData));
     
-                deleteBtn.style.display = 'block';
-                moveBtn.style.display = 'none';
-    
-                card.querySelector('.card-title__back-button').remove();
-                }
-            } else if (cardData.container === 'todo') {
-                const confirmToInProgress = confirm("Do you really want to move this card to 'In Progress' column?");
+            listDone.append(card);
+
+            deleteBtn.style.display = 'block';
+            moveBtn.style.display = 'none';
+
+            card.querySelector('.card-title__back-button').remove();
+            } else {
+                return;
+            }
+
+        } else if (cardData.container === 'todo') {
+            if (inprogressCountEl.innerText < 6) {
+            const confirmToInProgress = confirm("Do you really want to move this card to 'In Progress' column?");
 
                 if (confirmToInProgress) {
                 cardData.container = 'progress';
@@ -223,7 +225,7 @@ document.addEventListener('click', event => {
                 localStorage.setItem(cardId, JSON.stringify(cardData));
                     
                 listProgress.append(card);
-           
+
                 moveBtn.innerHTML = 'complete';
                 
                 editBtn.style.display = 'none';
@@ -252,10 +254,20 @@ document.addEventListener('click', event => {
     
                     backBtn.remove();
                     cardDescr.append(moveBtn);
+
+                    } else {
+                        return;
                     }
                 });
 
                 cardTitle.append(moveBtn);
+
+                } else {
+                    return;
+                }
+
+            } else {
+                alert('Oh, lazy asses, please, finish your 6 current tasks!');
             }
         }
     }
@@ -265,12 +277,11 @@ document.addEventListener('click', event => {
 
 function updateColumnsCounter() {
     const todoCountEl = document.getElementById("todo_counter");
-    const inprogressCountEl = document.getElementById("inprogress_counter");
     const doneCountEl = document.getElementById("done_counter");
 
     todoCountEl.innerText = todoContainer.querySelectorAll(".card").length;
-    inprogressCountEl.innerText = progressContainer.querySelectorAll(".card").length;
-    doneCountEl.innerText = doneContainer.querySelectorAll(".card").length;
+    inprogressCountEl.innerText = listProgress.querySelectorAll(".card").length;
+    doneCountEl.innerText = listDone.querySelectorAll(".card").length;
 }
 
 function createCard(id, title, description, user, container = "todo") {
