@@ -91,8 +91,7 @@ document.addEventListener("click", (event) => {
     if (event.target === document.querySelector(".popup-button__cancel")) {
         const popup = document.querySelector(".popup");
         popup.style.display = "none";
-    }
-
+    } 
 });
 
 const btn = document.querySelector(".list__button");
@@ -198,6 +197,7 @@ document.addEventListener('click', event => {
 
         const cardData = JSON.parse(localStorage.getItem(cardId));
 
+
         if (cardData.container === 'progress') {
             const confirmToDone = confirm("Do you really want to move this card to 'Done' column?");
 
@@ -226,7 +226,7 @@ document.addEventListener('click', event => {
                 localStorage.setItem(cardId, JSON.stringify(cardData));
                     
                 listProgress.append(card);
-        
+
                 moveBtn.innerHTML = 'complete';
                 
                 editBtn.style.display = 'none';
@@ -255,17 +255,21 @@ document.addEventListener('click', event => {
     
                     backBtn.remove();
                     cardDescr.append(moveBtn);
+
                     } else {
                         return;
                     }
                 });
 
                 cardTitle.append(moveBtn);
+
                 } else {
                     return;
                 }
             } else {
                 alert('Oh, lazy asses, please, finish your 6 current tasks!');
+
+
             }
         }
     }
