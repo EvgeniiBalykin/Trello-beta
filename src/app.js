@@ -197,7 +197,6 @@ document.addEventListener('click', event => {
 
         const cardData = JSON.parse(localStorage.getItem(cardId));
 
-
         if (cardData.container === 'progress') {
             const confirmToDone = confirm("Do you really want to move this card to 'Done' column?");
 
@@ -215,9 +214,9 @@ document.addEventListener('click', event => {
             } else {
                 return;
             }
+
         } else if (cardData.container === 'todo') {
             if (inprogressCountEl.innerText < 6) {
-
             const confirmToInProgress = confirm("Do you really want to move this card to 'In Progress' column?");
 
                 if (confirmToInProgress) {
@@ -266,10 +265,9 @@ document.addEventListener('click', event => {
                 } else {
                     return;
                 }
+
             } else {
                 alert('Oh, lazy asses, please, finish your 6 current tasks!');
-
-
             }
         }
     }
