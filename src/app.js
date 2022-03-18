@@ -1,10 +1,11 @@
 const todoContainer = document.querySelector(".list-todo");
-const progressContainer = document.querySelector('.list-progress')
-const doneContainer = document.querySelector('.list-done')
+const listProgress = document.querySelector('.list-progress');
+const listDone = document.querySelector('.list-done');
 let users = null;
 const editPopup = document.querySelector(".popup-edit");
 let cardId = 0;
 const cards = document.getElementsByClassName("card");
+const inprogressCountEl = document.getElementById("inprogress_counter");
 
 fetch("https://jsonplaceholder.typicode.com/users")
     .then((response) => response.json())
@@ -90,27 +91,7 @@ document.addEventListener("click", (event) => {
     if (event.target === document.querySelector(".popup-button__cancel")) {
         const popup = document.querySelector(".popup");
         popup.style.display = "none";
-    }
-
-    if(event.target.classList.contains('card-description__move-button')) {
-        const card = document.querySelector('.card');
-
-        const dataId = card.getAttribute('data-id');
-
-        const cardData = JSON.parse(localStorage.getItem(dataId));
-
-        if (cardData.container === 'todo') {
-            cardData.container = 'progress';
-             
-            localStorage.setItem(dataId, JSON.stringify(cardData)); 
-        } else if (cardData.container === 'progress') {
-            cardData.container = 'done';
-             
-            localStorage.setItem(dataId, JSON.stringify(cardData)); 
-        }
-
-        
-    };
+    } 
 });
 
 const btn = document.querySelector(".list__button");
@@ -187,7 +168,6 @@ document.addEventListener("click", (event) => {
         editPopup.style.display = "none";
 
         for (let i = 0; i < cards.length; i++) {
-            console.log(cards[i]);
             const id = cards[i].dataset.id;
             if (cardId === id) {
                 const titleCard = cards[i].querySelector(".card-title__title");
@@ -203,14 +183,105 @@ document.addEventListener("click", (event) => {
     }
 });
 
+document.addEventListener('click', event => {
+    if(event.target.classList.contains('card-description__move-button')) {
+        const card = event.target.closest('.card');
+        const cardId = card.dataset.id;
+        const editBtn = card.querySelector('.card-title__edit-button');
+        const moveBtn = card.querySelector('.card-description__move-button');
+        const deleteBtn = card.querySelector('.card-title__delete-button');
+        const listProgress = document.querySelector('.list-progress');
+        const listDone = document.querySelector('.list-done');
+        const cardTitle = card.querySelector('.card-title__button');
+        const cardDescr = card.querySelector('.card-description');
+
+        const cardData = JSON.parse(localStorage.getItem(cardId));
+
+        if (cardData.container === 'progress') {
+            const confirmToDone = confirm("Do you really want to move this card to 'Done' column?");
+
+            if (confirmToDone) {
+            cardData.container = 'done';
+                
+            localStorage.setItem(cardId, JSON.stringify(cardData));
+    
+            listDone.append(card);
+
+            deleteBtn.style.display = 'block';
+            moveBtn.style.display = 'none';
+
+            card.querySelector('.card-title__back-button').remove();
+            } else {
+                return;
+            }
+
+        } else if (cardData.container === 'todo') {
+            if (inprogressCountEl.innerText < 6) {
+            const confirmToInProgress = confirm("Do you really want to move this card to 'In Progress' column?");
+
+                if (confirmToInProgress) {
+                cardData.container = 'progress';
+                    
+                localStorage.setItem(cardId, JSON.stringify(cardData));
+                    
+                listProgress.append(card);
+
+                moveBtn.innerHTML = 'complete';
+                
+                editBtn.style.display = 'none';
+                deleteBtn.style.display = 'none';
+    
+                const backBtn = document.createElement('button');
+                backBtn.classList.add('card-title__back-button');
+                backBtn.innerHTML = 'back';
+                cardTitle.append(backBtn);
+    
+                backBtn.addEventListener('click', () => {  
+                    let confirmBackAction = confirm("Do you really want to move this card back?");
+
+                    if (confirmBackAction) {
+
+                    cardData.container = 'todo';
+                    
+                    localStorage.setItem(cardId, JSON.stringify(cardData));
+                        
+                    todoContainer.append(card);
+            
+                    moveBtn.innerHTML = 'move';
+    
+                    deleteBtn.style.display = 'block';
+                    editBtn.style.display = 'block';
+    
+                    backBtn.remove();
+                    cardDescr.append(moveBtn);
+
+                    } else {
+                        return;
+                    }
+                });
+
+                cardTitle.append(moveBtn);
+
+                } else {
+                    return;
+                }
+
+            } else {
+                alert('Oh, lazy asses, please, finish your 6 current tasks!');
+            }
+        }
+    }
+
+    updateColumnsCounter();
+});
+
 function updateColumnsCounter() {
     const todoCountEl = document.getElementById("todo_counter");
-    const inprogressCountEl = document.getElementById("inprogress_counter");
     const doneCountEl = document.getElementById("done_counter");
 
     todoCountEl.innerText = todoContainer.querySelectorAll(".card").length;
-    inprogressCountEl.innerText = progressContainer.querySelectorAll(".card").length;
-    doneCountEl.innerText = doneContainer.querySelectorAll(".card").length;
+    inprogressCountEl.innerText = listProgress.querySelectorAll(".card").length;
+    doneCountEl.innerText = listDone.querySelectorAll(".card").length;
 }
 
 function createCard(id, title, description, user, container = "todo") {
