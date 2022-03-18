@@ -295,3 +295,23 @@ function createCard(id, title, description, user, container = "todo") {
 function formatMinutes(minutes) {
     return minutes > 10 ? minutes.toString() : `0${minutes}`;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+   for(let i = 0; i < localStorage.length; i++) {
+       let keysStorage = localStorage.key(i);
+       let objectStorage = JSON.parse(localStorage.getItem(keysStorage))
+       const todoContainer = document.querySelector('.list-todo')
+       const progress = document.querySelector('.list-progress')
+       const done = document.querySelector('.list-done')
+       const card = renderCard(objectStorage)
+       
+       if(objectStorage.container === 'todo'){
+           todoContainer.append(card)
+       }
+       if(objectStorage.container === 'progress'){
+           progress.append(card)
+       }
+       if(objectStorage.container === 'done'){
+           done.append(card)
+       }
+}})
