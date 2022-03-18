@@ -1,4 +1,4 @@
-const todoContainer = document.querySelector(".list-todo");
+const listToDo = document.querySelector(".list-todo");
 const listProgress = document.querySelector('.list-progress');
 const listDone = document.querySelector('.list-done');
 let users = null;
@@ -78,7 +78,7 @@ document.addEventListener("click", (event) => {
 
         // render card
         const card = renderCard(cardData);
-        todoContainer.append(card)
+        listToDo.append(card)
         updateColumnsCounter();
 
         title.value = "";
@@ -190,8 +190,6 @@ document.addEventListener('click', event => {
         const editBtn = card.querySelector('.card-title__edit-button');
         const moveBtn = card.querySelector('.card-description__move-button');
         const deleteBtn = card.querySelector('.card-title__delete-button');
-        const listProgress = document.querySelector('.list-progress');
-        const listDone = document.querySelector('.list-done');
         const cardTitle = card.querySelector('.card-title__button');
         const cardDescr = card.querySelector('.card-description');
 
@@ -211,6 +209,7 @@ document.addEventListener('click', event => {
             moveBtn.style.display = 'none';
 
             card.querySelector('.card-title__back-button').remove();
+
             } else {
                 return;
             }
@@ -240,12 +239,11 @@ document.addEventListener('click', event => {
                     let confirmBackAction = confirm("Do you really want to move this card back?");
 
                     if (confirmBackAction) {
-
                     cardData.container = 'todo';
                     
                     localStorage.setItem(cardId, JSON.stringify(cardData));
                         
-                    todoContainer.append(card);
+                    listToDo.append(card);
             
                     moveBtn.innerHTML = 'move';
     
@@ -279,7 +277,7 @@ function updateColumnsCounter() {
     const todoCountEl = document.getElementById("todo_counter");
     const doneCountEl = document.getElementById("done_counter");
 
-    todoCountEl.innerText = todoContainer.querySelectorAll(".card").length;
+    todoCountEl.innerText = listToDo.querySelectorAll(".card").length;
     inprogressCountEl.innerText = listProgress.querySelectorAll(".card").length;
     doneCountEl.innerText = listDone.querySelectorAll(".card").length;
 }
