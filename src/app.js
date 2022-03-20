@@ -6,6 +6,18 @@ const editPopup = document.querySelector(".popup-edit");
 let cardId = 0;
 const cards = document.getElementsByClassName("card");
 const inprogressCountEl = document.getElementById("inprogress_counter");
+const popupAddCard = document.querySelector(".popup");
+const popupBtnConfirm = document.querySelector('.popup-button__confirm')
+const popupTitle = document.querySelector(".popup__title");
+const popupDescription = document.querySelector(".popup__description");
+const popupUserSelect = document.querySelector(".popup-button__user");
+const popupBtnCancel = document.querySelector('.popup-button__cancel')
+const btnAddCard = document.querySelector(".list__button");
+const popupEditTitle = document.querySelector(".popup-edit__title");
+const popupEditDescription = document.querySelector(".popup-edit__description");
+const popupEditUserSelect = document.querySelector(".popup-edit-button__user");
+
+initTimer();
 
 fetch("https://jsonplaceholder.typicode.com/users")
     .then((response) => response.json())
@@ -58,19 +70,13 @@ const renderCard = (card) => {
     return div
 };
 
-document.addEventListener("click", (event) => {
-    if (event.target === document.querySelector(".popup-button__confirm")) {
-        const title = document.querySelector(".popup__title");
-        const description = document.querySelector(".popup__description");
-        const userSelect = document.querySelector(".popup-button__user");
-
+popupBtnConfirm.addEventListener('click', () => {
         const id = Date.now();
-
         const cardData = createCard(
             id,
-            title.value,
-            description.value,
-            userSelect.value,
+            popupTitle.value,
+            popupDescription.value,
+            popupUserSelect.value,
         );
 
         // add to storage
@@ -81,50 +87,19 @@ document.addEventListener("click", (event) => {
         listToDo.append(card)
         updateColumnsCounter();
 
-        title.value = "";
-        description.value = "";
+        popupTitle.value = "";
+        popupDescription.value = "";
+        popupAddCard.style.display = "none";
+})
 
-        const popup = document.querySelector(".popup");
-        popup.style.display = "none";
-    }
+popupBtnCancel.addEventListener('click', () => {
+    popupAddCard.style.display = "none";
+})
 
-    if (event.target === document.querySelector(".popup-button__cancel")) {
-        const popup = document.querySelector(".popup");
-        popup.style.display = "none";
-    } 
+
+btnAddCard.addEventListener("click", () => {
+    popupAddCard.style.display = "block";
 });
-
-const btn = document.querySelector(".list__button");
-
-btn.addEventListener("click", () => {
-    const popup = document.querySelector(".popup");
-    popup.style.display = "block";
-});
-
-// Clock
-window.onload = function () {
-    initTimer();
-    updateColumnsCounter();
-};
-
-function initTimer() {
-    setInterval(function () {
-        // Seconds
-        const seconds = new Date().getSeconds();
-        document.getElementById("seconds").innerHTML =
-            (seconds < 10 ? "0" : "") + seconds;
-
-        // Minutes
-        const minutes = new Date().getMinutes();
-        document.getElementById("minutes").innerHTML =
-            (minutes < 10 ? "0" : "") + minutes;
-
-        // Hours
-        const hours = new Date().getHours();
-        document.getElementById("hours").innerHTML =
-            (hours < 10 ? "0" : "") + hours;
-    }, 1000);
-}
 
 document.addEventListener("click", (event) => {
     if (event.target.classList.contains("card-title__delete-button")) {
@@ -134,32 +109,25 @@ document.addEventListener("click", (event) => {
         card.remove();
         updateColumnsCounter();
     }
-});
 
-document.addEventListener("click", (event) => {
     if (event.target.classList.contains("card-title__edit-button")) {
         editPopup.style.display = "block";
         const card = event.target.closest(".card");
         cardId = card.dataset.id;
-        const title = editPopup.querySelector(".popup-edit__title");
-        const description = editPopup.querySelector(".popup-edit__description");
         const userData = JSON.parse(localStorage.getItem(cardId));
-        title.value = userData.title;
-        description.value = userData.description;
+        popupEditTitle.value = userData.title;
+        popupEditDescription.value = userData.description;
     }
     if (event.target.classList.contains("popup-edit-button__cancel")) {
         editPopup.style.display = "none";
     }
     if (event.target.classList.contains("popup-edit-button__edit")) {
-        const title = document.querySelector(".popup-edit__title");
-        const description = document.querySelector(".popup-edit__description");
-        const userSelect = document.querySelector(".popup-edit-button__user");
 
         function createCard() {
             return {
-                title: title.value,
-                description: description.value,
-                user: userSelect.value,
+                title: popupEditTitle.value,
+                description: popupEditDescription.value,
+                user: popupEditUserSelect.value,
                 id: cardId,
                 container: "todo",
             };
@@ -175,15 +143,12 @@ document.addEventListener("click", (event) => {
                     ".card-description__description",
                 );
                 const userCard = cards[i].querySelector(".card-user__user");
-                titleCard.textContent = title.value;
-                descriptionCard.textContent = description.value;
-                userCard.textContent = userSelect.value;
+                titleCard.textContent = popupEditTitle.value;
+                descriptionCard.textContent = popupEditDescription.value;
+                userCard.textContent = popupEditUserSelect.value;
             }
         }
     }
-});
-
-document.addEventListener('click', event => {
     if(event.target.classList.contains('card-description__move-button')) {
         const card = event.target.closest('.card');
         const cardId = card.dataset.id;
@@ -199,20 +164,11 @@ document.addEventListener('click', event => {
             const confirmToDone = confirm("Do you really want to move this card to 'Done' column?");
 
             if (confirmToDone) {
-            cardData.container = 'done';
-                
-            localStorage.setItem(cardId, JSON.stringify(cardData));
-    
-            listDone.append(card);
-
-            deleteBtn.style.display = 'block';
-            moveBtn.style.display = 'none';
+                changeBtnInDone({cardData, cardId, card, deleteBtn, moveBtn})
 
             card.querySelector('.card-title__back-button').remove();
 
-            } else {
-                return;
-            }
+            } 
 
         } else if (cardData.container === 'todo') {
             if (inprogressCountEl.innerText < 6) {
@@ -235,28 +191,8 @@ document.addEventListener('click', event => {
                 backBtn.innerHTML = 'back';
                 cardTitle.append(backBtn);
     
-                backBtn.addEventListener('click', () => {  
-                    let confirmBackAction = confirm("Do you really want to move this card back?");
-
-                    if (confirmBackAction) {
-                    cardData.container = 'todo';
-                    
-                    localStorage.setItem(cardId, JSON.stringify(cardData));
-                        
-                    listToDo.append(card);
-            
-                    moveBtn.innerHTML = 'move';
-    
-                    deleteBtn.style.display = 'block';
-                    editBtn.style.display = 'block';
-    
-                    backBtn.remove();
-                    cardDescr.append(moveBtn);
-
-                    } else {
-                        return;
-                    }
-                });
+                backBtn.addEventListener('click', () => 
+                backBtnHandler({cardData, cardId, card, moveBtn, deleteBtn, editBtn, backBtn, cardDescr}))
 
                 cardTitle.append(moveBtn);
 
@@ -297,21 +233,118 @@ function formatMinutes(minutes) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-   for(let i = 0; i < localStorage.length; i++) {
-       let keysStorage = localStorage.key(i);
-       let objectStorage = JSON.parse(localStorage.getItem(keysStorage))
-       const todoContainer = document.querySelector('.list-todo')
-       const progress = document.querySelector('.list-progress')
-       const done = document.querySelector('.list-done')
-       const card = renderCard(objectStorage)
-       
-       if(objectStorage.container === 'todo'){
-           todoContainer.append(card)
-       }
-       if(objectStorage.container === 'progress'){
-           progress.append(card)
-       }
-       if(objectStorage.container === 'done'){
-           done.append(card)
-       }
-}})
+    
+    for(let i = 0; i < localStorage.length; i++) {
+        let keysStorage = localStorage.key(i);
+        let cardData = JSON.parse(localStorage.getItem(keysStorage))
+        const card = renderCard(cardData)
+        const editBtn = card.querySelector('.card-title__edit-button');
+            const moveBtn = card.querySelector('.card-description__move-button');
+            const deleteBtn = card.querySelector('.card-title__delete-button');
+            const cardTitle = card.querySelector('.card-title__button');
+            const cardDescr = card.querySelector('.card-description');
+            const cardId = card.dataset.id;
+
+            console.log(editBtn)
+        
+        
+        if(cardData.container === 'todo'){
+            listToDo.append(card)
+
+        }
+        if(cardData.container === 'progress'){
+            moveBtn.innerHTML = 'complete'
+            editBtn.style.display = 'none';
+            deleteBtn.style.display = 'none';
+            const backBtn = document.createElement('button');
+            backBtn.classList.add('card-title__back-button');
+            backBtn.innerHTML = 'back';
+            cardTitle.append(backBtn);
+            backBtn.addEventListener('click',() => backBtnHandler({cardData, cardId, card, moveBtn, deleteBtn, editBtn, backBtn, cardDescr})) 
+            cardTitle.append(moveBtn);
+            listProgress.append(card)
+        }
+
+        if(cardData.container === 'done'){
+            editBtn.style.display = 'none';
+            changeBtnInDone({cardData, cardId, card, deleteBtn, moveBtn})
+            listDone.append(card)
+        }
+    }
+updateColumnsCounter();
+})
+
+const deleteAllCards = () => {
+    const card = listDone.querySelectorAll('.card')
+    card.forEach(item => {
+        for(key in localStorage){
+        const keysStorage = key
+        if(item.dataset.id === keysStorage){
+            item.remove()
+            localStorage.removeItem(key)
+        }
+    }
+    })
+}
+
+const deleteAllBtn = document.getElementsByClassName('list__button')
+deleteAllBtn[1].addEventListener('click', deleteAllCards)
+
+
+
+function backBtnHandler (data){ 
+     const {cardData, cardId, card, moveBtn, deleteBtn, editBtn, backBtn, cardDescr} = data 
+    let confirmBackAction = confirm("Do you really want to move this card back?");
+
+    if (confirmBackAction) {
+    cardData.container = 'todo';
+    
+    localStorage.setItem(cardId, JSON.stringify(cardData));
+        
+    listToDo.append(card);
+
+    moveBtn.innerHTML = 'move';
+
+    deleteBtn.style.display = 'block';
+    editBtn.style.display = 'block';
+
+    backBtn.remove();
+    cardDescr.append(moveBtn);
+
+    } else {
+        return;
+    }
+}
+
+function changeBtnInDone({cardData, cardId, card, deleteBtn, moveBtn}){
+
+            
+            cardData.container = 'done';
+                
+            localStorage.setItem(cardId, JSON.stringify(cardData));
+    
+            listDone.append(card);
+
+            deleteBtn.style.display = 'block';
+            moveBtn.style.display = 'none';
+
+}
+
+function initTimer() {
+    setInterval(function () {
+        // Seconds
+        const seconds = new Date().getSeconds();
+        document.getElementById("seconds").innerHTML =
+            (seconds < 10 ? "0" : "") + seconds;
+
+        // Minutes
+        const minutes = new Date().getMinutes();
+        document.getElementById("minutes").innerHTML =
+            (minutes < 10 ? "0" : "") + minutes;
+
+        // Hours
+        const hours = new Date().getHours();
+        document.getElementById("hours").innerHTML =
+            (hours < 10 ? "0" : "") + hours;
+    }, 1000);
+}
