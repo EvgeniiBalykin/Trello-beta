@@ -682,9 +682,14 @@ body {
       }
    }
 }
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 376px) {
+   .main__list {
+      .list__column {
+         width: 275px;
+      }
+   }
    .card {
-      width: 100%;
+      width: auto;
       &-title {
          &__title {
             font-size: 17px;
