@@ -56,7 +56,7 @@ const renderCard = (card) => {
       <h3 class="card-description__description">
           ${card.description}
       </h3>
-      <button class="card-description__move-button">Move</button>
+       <button class="card-description__move-button">Move</button>
     </div>
     <div class="card-user">
       <p class="card-user__user">
@@ -181,7 +181,7 @@ document.addEventListener("click", (event) => {
                     
                 listProgress.append(card);
 
-                moveBtn.innerHTML = 'complete';
+                moveBtn.innerHTML = 'done';
                 
                 editBtn.style.display = 'none';
                 deleteBtn.style.display = 'none';
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
         if(cardData.container === 'progress'){
-            moveBtn.innerHTML = 'complete'
+            moveBtn.innerHTML = 'done'
             editBtn.style.display = 'none';
             deleteBtn.style.display = 'none';
             const backBtn = document.createElement('button');
