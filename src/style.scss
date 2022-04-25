@@ -84,7 +84,10 @@ $color1: rgb(238, 239, 240);
 
 body {
    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-   background: linear-gradient(100deg, #eecfba, #c5dde8);
+   background-color: #330000;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 400'%3E%3Cdefs%3E%3CradialGradient id='a' cx='396' cy='281' r='514' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23D18'/%3E%3Cstop offset='1' stop-color='%23330000'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='400' y1='148' x2='400' y2='333'%3E%3Cstop offset='0' stop-color='%23FA3' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23FA3' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='800' height='400'/%3E%3Cg fill-opacity='0.4'%3E%3Ccircle fill='url(%23b)' cx='267.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='532.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='400' cy='30' r='300'/%3E%3C/g%3E%3C/svg%3E");
+background-attachment: fixed;
+background-size: cover;
 }
 .container {
    height: 100vh;
@@ -96,7 +99,14 @@ body {
 .header {
    height: 85px;
    border-radius: 5px;
-   box-shadow: 0 3px 5px rgba(73, 73, 74, 0.3);
+   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+
+   .header-logo__link{
+      font-size: 20px;
+      font-weight: 500;
+      color: #cacaca;
+      margin-left: 20px;
+      }
 
    .header__container {
       display: flex;
@@ -109,7 +119,7 @@ body {
       font-size: 24px;
       font-family: Verdana, Arial, Sans-serif;
       text-align: center;
-      color: #207df8;
+      color: #cacaca;
       margin: 27px;
    }
    .header-clock ul {
@@ -168,8 +178,8 @@ body {
          display: flex;
          justify-content: space-between;
          background: rgba(73, 73, 74, 0.3);
-         color: #172b4d;
-         font-size: 1.1em;
+         color: #cacaca;
+                  font-size: 1.1em;
          padding: 8px 6px;
          border-radius: 5px 5px 0 0;
       }
@@ -194,8 +204,8 @@ body {
       .list__button {
          width: 100%;
          height: 100%;
-         color: #172b4d;
-         font-size: 1.1em;
+         color: #cacaca;
+                  font-size: 1.1em;
       }
    }
 }
@@ -205,14 +215,14 @@ body {
    display: flex;
    flex-direction: column;
    gap: 15px;
-   background-color: rgb(255, 255, 255);
+   background-color: rgba(255, 255, 255, 0.8);
    width: 100%;
    padding: 20px 10px;
    &:nth-child(odd) {
-      background-color: rgb(233, 233, 233);
+      background-color: rgba(255, 255, 255, 0.8);
    }
    &:nth-child(even) {
-      background-color: rgb(224, 224, 224);
+      background-color: rgba(255, 255, 255, 0.8);
    }
    &-title {
       display: flex;
@@ -231,63 +241,60 @@ body {
          flex-direction: column;
          gap: 10px;
          .card-title__edit-button {
-            border: 3px solid #00ff9d;
+            border: 3px solid #5fcc7a;
             text-transform: uppercase;
             text-decoration: none;
             display: inline-block;
-            width: 80px;
-            height: 30px;
-            border-radius: 10px;
+            width: 50px;
+            height: 20px;
             box-shadow: 0 0 40px 40px #fff inset, 0 0 0 0 #fff;
             font-family: "Montserrat", sans-serif;
             font-weight: bold;
-            font-size: 15px;
-            letter-spacing: 2px;
-            color: #00ff9d;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #5fcc7a;
             transition: 0.15s ease-in-out;
             &:hover {
-               box-shadow: 0 0 10px 0 #00ff9d inset, 0 0 10px 4px #00ff9d;
-               color: #00ff9d;
+               box-shadow: 0 0 2px 0 #5fcc7a inset, 0 0 2px 0px #5fcc7a;
+               color: #5fcc7a;
             }
          }
          .card-title__delete-button {
-            border: 3px solid #ff6464;
+            border: 3px solid #ff8282;
             text-transform: uppercase;
             text-decoration: none;
             display: inline-block;
-            width: 80px;
-            height: 30px;
-            border-radius: 10px;
+            width: 50px;
+            height: 20px;
             box-shadow: 0 0 40px 40px #fff inset, 0 0 0 0 #fff;
             font-family: "Montserrat", sans-serif;
             font-weight: bold;
-            font-size: 15px;
-            letter-spacing: 2px;
-            color: #ff6464;
+            font-size: 9px;
+            letter-spacing: 1px;
+            color: #ff8282;
             transition: 0.15s ease-in-out;
             &:hover {
-               box-shadow: 0 0 10px 0 #ff6464 inset, 0 0 10px 4px #ff6464;
-               color: #ff6464;
+               box-shadow: 0 0 2px 0 #ff8282 inset, 0 0 2px 0px #ff8282;
+               color: #ff8282;
             }
          }
          .card-title__back-button {
-            border: 3px solid #00ff9d;
+            border: 3px solid #5fcc7a;
             text-transform: uppercase;
             text-decoration: none;
             display: inline-block;
-            width: 80px;
-            height: 30px;
-            border-radius: 10px;
+            width: 50px;
+            height: 20px;
             box-shadow: 0 0 40px 40px #fff inset, 0 0 0 0 #fff;
             font-family: "Montserrat", sans-serif;
             font-weight: bold;
-            font-size: 15px;
-            letter-spacing: 2px;
-            color: #00ff9d;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #5fcc7a;
             transition: 0.15s ease-in-out;
             &:hover {
-               box-shadow: 0 0 10px 0 #00ff9d inset, 0 0 10px 4px #00ff9d;
-               color: #00ff9d;
+               box-shadow: 0 0 2px 0 #5fcc7a inset, 0 0 2px 0px #5fcc7a;
+               color: #5fcc7a;
             }
          }
       }
@@ -309,19 +316,18 @@ body {
          text-transform: uppercase;
          text-decoration: none;
          display: inline-block;
-         width: 80px;
-         height: 30px;
-         border-radius: 10px;
+         width: 50px;
+         height: 20px;
          box-shadow: 0 0 40px 40px #fff inset, 0 0 0 0 #fff;
          font-family: "Montserrat", sans-serif;
          font-weight: bold;
-         font-size: 15px;
-         letter-spacing: 2px;
+         font-size: 12px;
+         letter-spacing: 1px;
          color: #64a6fd;
          transition: 0.15s ease-in-out;
       }
       &__move-button:hover {
-         box-shadow: 0 0 10px 0 #64a6fd inset, 0 0 10px 4px #64a6fd;
+         box-shadow: 0 0 2px 0 #64a6fd inset, 0 0 2px 0px #64a6fd;
          color: #64a6fd;
       }
       .card-title__delete-button {
@@ -332,7 +338,6 @@ body {
          font-weight: 700;
          color: white;
          padding: 10px;
-         border-radius: 3px;
          background: rgb(190, 54, 65);
          box-shadow: 0 -3px rgb(190, 54, 65) inset;
          transition: 0.2s;
@@ -352,7 +357,6 @@ body {
          font-weight: 700;
          color: white;
          padding: 10px;
-         border-radius: 3px;
          background: rgb(159, 76, 177);
          box-shadow: 0 -3px rgb(159, 76, 177) inset;
          transition: 0.2s;
@@ -395,7 +399,7 @@ body {
       display: flex;
       flex-direction: column;
       gap: 20px;
-      background: #afd2dde7;
+      background: #f4e0e0f0;
       max-width: 800px;
       padding: 30px;
       .popup__title,
@@ -407,69 +411,67 @@ body {
       .popup__description,
       .popup-edit__description {
          height: 100px;
-         background-color: whit;
+         background-color: white;
       }
       .popup-button__container,
       .popup-edit-button__container {
          display: flex;
          justify-content: space-between;
-         .popup-button__select,
-         .popup-edit-button__select {
-            text-transform: uppercase;
-            border: 0;
-            font-weight: 700;
-            color: white;
-            padding: 10px;
-            border-radius: 3px;
-            background: rgb(0, 93, 105);
-            box-shadow: 0 -3px rgb(0, 93, 105) inset;
-            transition: 0.2s;
-            &:hover {
-               background: rgb(0, 93, 105);
-            }
-         }
+         // .popup-button__select,
+         // .popup-edit-button__select {
+         //    text-transform: uppercase;
+         //    border: 0;
+         //    font-weight: 700;
+         //    color: white;
+         //    padding: 10px;
+         //    border-radius: 3px;
+         //    background: rgb(141, 218, 229);
+         //    box-shadow: 0 -3px rgb(141, 218, 229) inset;
+         //    transition: 0.2s;
+         //    &:hover {
+         //       background: rgb(141, 218, 229);
+         //    }
+         // }
          .popup-button,
          .popup-edit-button {
             margin-left: 10px;
             &__cancel {
-               border: 3px solid #ff6464;
+               border: 3px solid #ff8282;
                text-transform: uppercase;
                text-decoration: none;
                display: inline-block;
-               width: 80px;
-               height: 30px;
-               border-radius: 10px;
+               width: 50px;
+               height: 20px;
                box-shadow: 0 0 40px 40px #fff inset, 0 0 0 0 #fff;
                font-family: "Montserrat", sans-serif;
                font-weight: bold;
-               font-size: 15px;
-               letter-spacing: 2px;
-               color: #ff6464;
+               font-size: 9px;
+               letter-spacing: 1px;
+               color: #ff8282;
                transition: 0.15s ease-in-out;
                &:hover {
-                  box-shadow: 0 0 10px 0 #ff6464 inset, 0 0 10px 4px #ff6464;
-                  color: #ff6464;
+                  box-shadow: 0 0 2px 0 #ff8282 inset, 0 0 2px 0px #ff8282;
+                  color: #ff8282;
                }
             }
             .popup-button__confirm,
             .popup-edit-button__edit {
-               border: 3px solid #00ff9d;
+               border: 3px solid #5fcc7a;
                text-transform: uppercase;
                text-decoration: none;
                display: inline-block;
-               width: 80px;
-               height: 30px;
-               border-radius: 10px;
+               width: 50px;
+               height: 20px;
                box-shadow: 0 0 40px 40px #fff inset, 0 0 0 0 #fff;
                font-family: "Montserrat", sans-serif;
                font-weight: bold;
-               font-size: 15px;
+               font-size: 9px;
                letter-spacing: 2px;
-               color: #00ff9d;
+               color: #5fcc7a;
                transition: 0.15s ease-in-out;
                &:hover {
-                  box-shadow: 0 0 10px 0 #00ff9d inset, 0 0 10px 4px #00ff9d;
-                  color: #00ff9d;
+                  box-shadow: 0 0 2px 0 #5fcc7a inset, 0 0 2px 0px #5fcc7a;
+                  color: #5fcc7a;
                }
             }
          }
